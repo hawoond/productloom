@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "name": "CWS Workspace",
-  "namespace": "cws",
-  "profile": "cws-compat",
+  "name": "ProductLoom Workspace",
+  "namespace": "plw",
+  "profile": "plw-compat",
   "locales": [
     "KR"
   ],

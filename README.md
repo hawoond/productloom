@@ -10,7 +10,7 @@ It includes:
 - a zero-dependency CLI for deterministic workspace generation and validation;
 - a Codex plugin with seven focused workflow skills;
 - configurable locales, product areas, paths, document IDs, statuses, and completion policies;
-- a non-destructive compatibility profile for existing CWS repositories.
+- a non-destructive compatibility profile for existing PLW repositories.
 
 The CLI only reads and writes local files. External source, design, repository, or notification
 tools are used only when a user enables them through a workflow skill.
@@ -231,7 +231,7 @@ productloom doctor
 | `productloom audit [path]` | No | Run strict workspace checks |
 | `productloom status [path]` | No | Summarize document coverage and validation state |
 | `productloom doctor [path]` | No | Check the runtime and workspace |
-| `productloom migrate [path] --from cws` | Only with `--apply` | Preview or create CWS compatibility configuration |
+| `productloom migrate [path] --from plw` | Only with `--apply` | Preview or create PLW compatibility configuration |
 
 Common options:
 
@@ -257,7 +257,7 @@ Modes:
 
 - `strict` checks the configured schema, document IDs and frontmatter, spec-flow pairs, design
   documents, references, statuses, versions, and readiness requirements.
-- `compat` keeps legacy CWS structural differences non-blocking where possible while still
+- `compat` keeps legacy PLW structural differences non-blocking where possible while still
   reporting them.
 
 Results:
@@ -272,16 +272,19 @@ Exit codes:
 - `1`: validation or a required doctor check failed.
 - `2`: the command or configuration could not be processed.
 
-## Existing CWS workspace
+## Existing PLW workspace
+
+PLW stands for ProductLoom Workspace. The compatibility profile preserves the established
+`KR/raw`, `KR/spec`, and `KR/design` layout while removing organization-specific naming.
 
 Migration is dry-run by default. It creates a compatibility configuration only when `--apply` is
 present and never moves or renames existing documents.
 
 ```bash
-cd your-cws-repository
+cd your-plw-repository
 
-productloom migrate --from cws
-productloom migrate --from cws --apply
+productloom migrate --from plw
+productloom migrate --from plw --apply
 productloom validate --mode compat
 ```
 
@@ -318,7 +321,7 @@ For a new strict workspace:
   run: productloom validate --mode strict --gate implementation-readiness --fail-on-warn
 ```
 
-During CWS adoption:
+During PLW adoption:
 
 ```yaml
 - name: Validate ProductLoom compatibility

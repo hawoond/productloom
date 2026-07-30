@@ -54,7 +54,7 @@ into a pass.
 
 ## Compatibility
 
-`compat` mode preserves the lightweight structural checks expected by existing CWS workspaces.
+`compat` mode preserves the lightweight structural checks expected by existing PLW workspaces.
 `strict` mode adds schema, pair, reference, version, and readiness checks.
 
 A migration should initially run `compat` as a blocking CI job and `strict` as report-only. Rules

@@ -73,15 +73,15 @@ test("strict validation fails when a spec and flow pair is incomplete", () => {
   }
 });
 
-test("CWS migration is dry-run by default and non-destructive when applied", () => {
+test("PLW migration is dry-run by default and non-destructive when applied", () => {
   const directory = temporaryDirectory();
   try {
-    const dryRun = run(["migrate", directory, "--from", "cws"]);
+    const dryRun = run(["migrate", directory, "--from", "plw"]);
     assert.equal(dryRun.status, 0, dryRun.stderr);
     assert.match(dryRun.stdout, /DRY RUN/);
     assert.equal(fs.existsSync(path.join(directory, ".productloom", "workspace.json")), false);
 
-    const applied = run(["migrate", directory, "--from", "cws", "--apply"]);
+    const applied = run(["migrate", directory, "--from", "plw", "--apply"]);
     assert.equal(applied.status, 0, applied.stderr);
     const config = JSON.parse(
       fs.readFileSync(path.join(directory, ".productloom", "workspace.json"), "utf8")
@@ -89,6 +89,7 @@ test("CWS migration is dry-run by default and non-destructive when applied", () 
     assert.deepEqual(config.locales, ["KR"]);
     assert.deepEqual(config.products, ["admin", "client"]);
     assert.equal(config.documents.root, "KR");
+    assert.equal(config.profile, "plw-compat");
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }

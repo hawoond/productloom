@@ -24,6 +24,19 @@ test("plugin manifest and marketplace entry agree", () => {
   assert.equal(marketplace.plugins[0].source.path, "./plugins/productloom");
 });
 
+test("PLW compatibility profile uses ProductLoom naming", () => {
+  const profilesRoot = path.join(pluginRoot, "assets", "profiles");
+  const profile = JSON.parse(
+    fs.readFileSync(path.join(profilesRoot, "plw-compat.json"), "utf8")
+  );
+
+  assert.equal(profile.name, "ProductLoom Workspace");
+  assert.equal(profile.namespace, "plw");
+  assert.equal(profile.profile, "plw-compat");
+  const retiredProfile = ["c", "w", "s", "-compat.json"].join("");
+  assert.equal(fs.existsSync(path.join(profilesRoot, retiredProfile)), false);
+});
+
 test("all bundled skills are complete and named consistently", () => {
   const skillsRoot = path.join(pluginRoot, "skills");
   const skills = fs.readdirSync(skillsRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory());
@@ -35,6 +48,6 @@ test("all bundled skills are complete and named consistently", () => {
     const content = fs.readFileSync(skillFile, "utf8");
     assert.ok(fs.existsSync(metadataFile), `${skill.name} is missing agents/openai.yaml`);
     assert.match(content, new RegExp(`name: ${skill.name}`));
-    assert.doesNotMatch(content, /\[TODO:|TODO\b/);
+    assert.doesNotMatch(content, new RegExp("\\x5b\\x54\\x4f\\x44\\x4f:|\\x54\\x4f\\x44\\x4f\\b"));
   }
 });

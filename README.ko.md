@@ -10,7 +10,7 @@ ProductLoom은 기획 의도와 근거 자료, 제품 계약, 디자인 결정, 
 - 일관된 워크스페이스 생성과 검증을 위한 외부 의존성 없는 CLI
 - 제품 작업 단계를 안내하는 7개의 Codex 스킬
 - 언어, 제품 영역, 경로, 문서 ID, 상태, 완료 정책을 조정할 수 있는 설정
-- 기존 CWS 저장소를 변경하지 않고 도입할 수 있는 호환 프로필
+- 기존 PLW 저장소를 변경하지 않고 도입할 수 있는 호환 프로필
 
 CLI는 로컬 파일만 읽고 씁니다. 외부 문서, 디자인, 저장소, 알림 도구는 사용자가
 워크플로 스킬을 통해 명시적으로 활성화한 경우에만 사용합니다.
@@ -256,7 +256,7 @@ productloom doctor
 | `productloom audit [path]` | 아니요 | strict 기준 전체 점검 |
 | `productloom status [path]` | 아니요 | 문서 범위와 검증 상태 요약 |
 | `productloom doctor [path]` | 아니요 | 실행 환경과 설정 확인 |
-| `productloom migrate [path] --from cws` | `--apply`일 때만 | CWS 호환 설정 미리보기 또는 생성 |
+| `productloom migrate [path] --from plw` | `--apply`일 때만 | PLW 호환 설정 미리보기 또는 생성 |
 
 공통 옵션:
 
@@ -289,7 +289,7 @@ productloom init [path] \
 - `--namespace`: 문서 ID 앞부분에 사용할 안정적인 식별자
 - `--locales`: 쉼표로 구분한 언어 목록
 - `--products`: 쉼표로 구분한 제품 영역 목록
-- `--profile`: 신규 저장소는 `default`, CWS 구조를 직접 만들 때는 `cws-compat`
+- `--profile`: 신규 저장소는 `default`, PLW 구조를 직접 만들 때는 `plw-compat`
 
 간단한 내장 도움말은 `productloom help`로 확인합니다.
 
@@ -299,7 +299,7 @@ productloom init [path] \
 
 - `strict`: 설정 스키마, 문서 ID와 frontmatter, spec-flow 쌍, 디자인 문서, 참조 경로,
   상태, 버전, 구현 준비 조건을 검사합니다.
-- `compat`: 기존 CWS 문서 구조의 차이를 가능한 범위에서 비차단 경고로 유지하면서
+- `compat`: 기존 PLW 문서 구조의 차이를 가능한 범위에서 비차단 경고로 유지하면서
   문제를 보고합니다.
 
 검증 결과:
@@ -314,19 +314,22 @@ productloom init [path] \
 - `1`: 검증 또는 필수 doctor 항목이 실패했습니다.
 - `2`: 명령이나 설정을 처리할 수 없습니다.
 
-## 기존 CWS 저장소에 적용
+## 기존 PLW 저장소에 적용
+
+PLW는 ProductLoom Workspace의 축약어입니다. 호환 프로필은 조직에 종속된 명칭 없이
+기존 `KR/raw`, `KR/spec`, `KR/design` 구조를 그대로 유지합니다.
 
 마이그레이션은 기본적으로 미리보기만 수행합니다. `--apply`를 지정해야 호환 설정을
 생성하며, 기존 문서를 이동하거나 이름을 바꾸지 않습니다.
 
 ```bash
-cd your-cws-repository
+cd your-plw-repository
 
 # 변경 없이 생성 예정 설정 확인
-productloom migrate --from cws
+productloom migrate --from plw
 
 # .productloom/workspace.json만 생성
-productloom migrate --from cws --apply
+productloom migrate --from plw --apply
 
 # 기존 구조에 맞춘 검증
 productloom validate --mode compat
@@ -367,7 +370,7 @@ ProductLoom은 현재 디렉터리부터 상위 디렉터리로 이동하며
   run: productloom validate --mode strict --gate implementation-readiness --fail-on-warn
 ```
 
-CWS 도입 초기:
+PLW 도입 초기:
 
 ```yaml
 - name: Validate ProductLoom compatibility
@@ -405,7 +408,7 @@ ProductLoom은 기존 내용을 보호합니다. 파일을 먼저 검토한 뒤 
 `source_refs` 값은 워크스페이스 기준 상대 경로입니다. 경로를 수정하거나 참조 문서를
 복구한 후 strict 검증을 다시 실행합니다.
 
-### CWS strict 검증에서 기존 경고가 많이 나오는 경우
+### PLW strict 검증에서 기존 경고가 많이 나오는 경우
 
 처음부터 기존 문서를 대량 수정하지 않습니다. `compat`를 차단 기준으로 유지하고
 strict JSON 결과를 저장하여 경고 유형별로 점진적으로 정리합니다.
