@@ -15,6 +15,7 @@
     "plugins/",
     "schemas/",
     "README.md",
+    "README.ko.md",
     "LICENSE"
   ],
   "engines": {

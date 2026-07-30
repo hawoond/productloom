@@ -108,10 +108,10 @@ function copy(value) {
 }
 
 function loadProfile(name) {
-  const normalized = name === "cws" ? "cws-compat" : name;
+  const normalized = name === "plw" ? "plw-compat" : name;
   const profilePath = path.join(PROFILE_DIRECTORY, `${normalized}.json`);
   if (!fs.existsSync(profilePath)) {
-    throw new Error(`Unknown profile "${name}". Available profiles: default, cws-compat.`);
+    throw new Error(`Unknown profile "${name}". Available profiles: default, plw-compat.`);
   }
   return readJson(profilePath);
 }
@@ -139,7 +139,7 @@ function workspaceConfig(profileName, values = {}) {
     locales: values.locales || profile.locales,
     products: values.products || profile.products
   });
-  config.profile = profileName === "cws" ? "cws-compat" : profileName;
+  config.profile = profileName === "plw" ? "plw-compat" : profileName;
   return config;
 }
 
@@ -886,10 +886,10 @@ function doctorCommand(parsed) {
 
 function migrateCommand(parsed) {
   const source = String(parsed.options.from || "");
-  if (source !== "cws") throw new Error('Only "--from cws" is supported.');
+  if (source !== "plw") throw new Error('Only "--from plw" is supported.');
   const target = path.resolve(parsed.options.root || parsed.positional[1] || process.cwd());
   const output = configPath(target);
-  const config = workspaceConfig("cws-compat", {
+  const config = workspaceConfig("plw-compat", {
     name: parsed.options.name || titleCase(path.basename(target)),
     namespace: parsed.options.namespace || slugify(path.basename(target))
   });
@@ -898,7 +898,7 @@ function migrateCommand(parsed) {
   if (!apply) {
     console.log(`DRY RUN ${toPosix(output)}`);
     console.log("No documents will be moved or renamed.");
-    console.log('Apply with: productloom migrate --from cws --apply');
+    console.log('Apply with: productloom migrate --from plw --apply');
     return 0;
   }
   if (fs.existsSync(output) && !parsed.options.force) {
@@ -914,14 +914,14 @@ function printHelp() {
   console.log(`ProductLoom
 
 Usage:
-  productloom init [path] [--profile default|cws-compat]
+  productloom init [path] [--profile default|plw-compat]
   productloom new screen --product <name> --screen <name> [--title <title>]
   productloom new brief|meeting|reference|feedback [--title <title>] [--slug <slug>]
   productloom validate [path] [--mode compat|strict] [--gate <gate>] [--format text|json]
   productloom audit [path] [--format text|json]
   productloom status [path] [--format text|json]
   productloom doctor [path]
-  productloom migrate [path] --from cws [--apply]
+  productloom migrate [path] --from plw [--apply]
 
 Common options:
   --root <path>       Workspace root
