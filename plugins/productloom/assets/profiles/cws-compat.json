@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "name": "CWS Workspace",
+  "namespace": "cws",
+  "profile": "cws-compat",
+  "locales": [
+    "KR"
+  ],
+  "products": [
+    "admin",
+    "client"
+  ],
+  "canonical": {
+    "provider": "github",
+    "defaultBranch": "develop",
+    "completion": {
+      "requirePullRequest": true,
+      "requireCiPass": true,
+      "requireMerge": true
+    }
+  },
+  "documents": {
+    "root": "KR",
+    "paths": {
+      "raw": "{root}/raw",
+      "spec": "{root}/spec/{product}/{screen}",
+      "design": "{root}/design/{product}/{screen}"
+    },
+    "idPattern": "{locale}.{layer}.{product}.{screen}.{docType}",
+    "localeField": "country",
+    "defaultStatus": "approved",
+    "statuses": [
+      "draft",
+      "review",
+      "approved",
+      "deprecated",
+      "superseded"
+    ]
+  },
+  "validation": {
+    "mode": "compat",
+    "requiredDesignDocs": [
+      "plan",
+      "figma",
+      "components",
+      "tokens"
+    ],
+    "sourceRegistry": {
+      "required": true,
+      "path": "registry/drive-map.json"
+    }
+  }
+}

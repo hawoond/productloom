@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hawoond/productloom/schemas/document-frontmatter.schema.json",
+  "title": "ProductLoom Document Frontmatter",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "doc_type",
+    "product",
+    "status",
+    "version",
+    "created",
+    "updated"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "doc_type": {
+      "enum": [
+        "brief",
+        "meeting",
+        "reference",
+        "feedback",
+        "spec",
+        "flow",
+        "plan",
+        "figma",
+        "components",
+        "tokens"
+      ]
+    },
+    "product": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "review",
+        "approved",
+        "deprecated",
+        "superseded"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "downstream_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "locale"
+      ]
+    },
+    {
+      "required": [
+        "country"
+      ]
+    }
+  ],
+  "additionalProperties": true
+}

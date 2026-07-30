@@ -1,0 +1,44 @@
+{
+  "name": "productloom",
+  "version": "0.1.0",
+  "description": "Traceable product contracts from source material to implementation.",
+  "type": "module",
+  "bin": {
+    "productloom": "./bin/productloom.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --test && node bin/productloom.mjs validate examples/minimal --mode strict && npm pack --dry-run"
+  },
+  "files": [
+    "bin/",
+    "plugins/",
+    "schemas/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hawoond/productloom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hawoond/productloom/issues"
+  },
+  "homepage": "https://github.com/hawoond/productloom#readme",
+  "author": {
+    "name": "hawoond",
+    "url": "https://github.com/hawoond"
+  },
+  "license": "MIT",
+  "keywords": [
+    "product-management",
+    "specification",
+    "design-handoff",
+    "traceability",
+    "codex-plugin",
+    "workflow"
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hawoond/productloom/schemas/workspace.schema.json",
+  "title": "ProductLoom Workspace",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "name",
+    "namespace",
+    "locales",
+    "products",
+    "documents",
+    "validation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "namespace": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "profile": {
+      "type": "string"
+    },
+    "locales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "products": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+      }
+    },
+    "canonical": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "enum": [
+            "git",
+            "github",
+            "gitlab",
+            "other"
+          ]
+        },
+        "defaultBranch": {
+          "type": "string"
+        },
+        "completion": {
+          "type": "object",
+          "properties": {
+            "requirePullRequest": {
+              "type": "boolean"
+            },
+            "requireCiPass": {
+              "type": "boolean"
+            },
+            "requireMerge": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "documents": {
+      "type": "object",
+      "required": [
+        "root",
+        "paths",
+        "idPattern",
+        "localeField",
+        "defaultStatus",
+        "statuses"
+      ],
+      "properties": {
+        "root": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "object",
+          "required": [
+            "raw",
+            "spec",
+            "design"
+          ],
+          "properties": {
+            "raw": {
+              "type": "string"
+            },
+            "spec": {
+              "type": "string"
+            },
+            "design": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "idPattern": {
+          "type": "string"
+        },
+        "localeField": {
+          "type": "string"
+        },
+        "defaultStatus": {
+          "type": "string"
+        },
+        "statuses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "mode",
+        "requiredDesignDocs"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "compat",
+            "strict"
+          ]
+        },
+        "requiredDesignDocs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "plan",
+              "figma",
+              "components",
+              "tokens"
+            ]
+          }
+        },
+        "sourceRegistry": {
+          "type": "object",
+          "required": [
+            "required",
+            "path"
+          ],
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "path": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

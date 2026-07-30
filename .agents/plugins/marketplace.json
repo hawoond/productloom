@@ -1,0 +1,20 @@
+{
+  "name": "productloom",
+  "interface": {
+    "displayName": "ProductLoom"
+  },
+  "plugins": [
+    {
+      "name": "productloom",
+      "source": {
+        "source": "local",
+        "path": "./plugins/productloom"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

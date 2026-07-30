@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProductLoom Implement"
+  short_description: "Implement approved product contracts safely"
+  default_prompt: "Use $productloom-implement to implement this ProductLoom screen from approved inputs."

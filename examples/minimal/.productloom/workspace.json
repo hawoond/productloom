@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "name": "Storefront",
+  "namespace": "storefront",
+  "profile": "default",
+  "locales": [
+    "en"
+  ],
+  "products": [
+    "app"
+  ],
+  "canonical": {
+    "provider": "git",
+    "defaultBranch": "main",
+    "completion": {
+      "requirePullRequest": true,
+      "requireCiPass": true,
+      "requireMerge": true
+    }
+  },
+  "documents": {
+    "root": "product",
+    "paths": {
+      "raw": "{root}/{locale}/raw",
+      "spec": "{root}/{locale}/spec/{product}/{screen}",
+      "design": "{root}/{locale}/design/{product}/{screen}"
+    },
+    "idPattern": "{namespace}.{locale}.{layer}.{product}.{screen}.{docType}",
+    "localeField": "locale",
+    "defaultStatus": "draft",
+    "statuses": [
+      "draft",
+      "review",
+      "approved",
+      "deprecated",
+      "superseded"
+    ]
+  },
+  "validation": {
+    "mode": "strict",
+    "requiredDesignDocs": [
+      "plan",
+      "components",
+      "tokens"
+    ],
+    "sourceRegistry": {
+      "required": false,
+      "path": "registry/sources.json"
+    }
+  }
+}

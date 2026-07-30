@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProductLoom Ingest"
+  short_description: "Normalize source material into product briefs"
+  default_prompt: "Use $productloom-ingest to turn these sources into traceable ProductLoom inputs."

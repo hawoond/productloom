@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProductLoom Validate"
+  short_description: "Check lifecycle gates and document integrity"
+  default_prompt: "Use $productloom-validate to check whether this workspace can advance to the next stage."

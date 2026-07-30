@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProductLoom Design"
+  short_description: "Translate approved contracts into design plans"
+  default_prompt: "Use $productloom-design to turn this approved contract into an implementation-ready design plan."

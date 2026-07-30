@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProductLoom Spec"
+  short_description: "Build implementation-grounded product contracts"
+  default_prompt: "Use $productloom-spec to write a product contract grounded in the current code and sources."

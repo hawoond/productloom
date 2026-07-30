@@ -1,0 +1,37 @@
+{
+  "name": "productloom",
+  "version": "0.1.0",
+  "description": "Trace product intent from source material through contracts, design, and implementation.",
+  "author": {
+    "name": "hawoond",
+    "url": "https://github.com/hawoond"
+  },
+  "homepage": "https://github.com/hawoond/productloom",
+  "repository": "https://github.com/hawoond/productloom",
+  "license": "MIT",
+  "keywords": [
+    "product-management",
+    "specification",
+    "design-handoff",
+    "traceability"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "ProductLoom",
+    "shortDescription": "Weave product intent into delivery.",
+    "longDescription": "A traceable workflow for turning source material into product contracts, design plans, and implementation-ready handoffs.",
+    "developerName": "hawoond",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/hawoond/productloom",
+    "defaultPrompt": [
+      "Set up ProductLoom in this repository.",
+      "Route this product request through ProductLoom.",
+      "Validate this ProductLoom workspace."
+    ],
+    "brandColor": "#6750A4"
+  }
+}

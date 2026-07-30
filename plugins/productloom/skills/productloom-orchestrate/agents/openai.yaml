@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProductLoom Orchestrate"
+  short_description: "Route work across the ProductLoom lifecycle"
+  default_prompt: "Use $productloom-orchestrate to route this product request through the right stages."

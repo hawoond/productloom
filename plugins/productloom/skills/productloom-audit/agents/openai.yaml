@@ -1,0 +1,4 @@
+interface:
+  display_name: "ProductLoom Audit"
+  short_description: "Detect drift across sources, contracts, and design"
+  default_prompt: "Use $productloom-audit to find traceability gaps and contract drift in this workspace."
