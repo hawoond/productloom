@@ -37,3 +37,31 @@ test("repository contains no private workspace data or generation markers", () =
     }
   }
 });
+
+test("English and Korean readmes provide complete setup paths", () => {
+  const english = fs.readFileSync(path.join(repositoryRoot, "README.md"), "utf8");
+  const korean = fs.readFileSync(path.join(repositoryRoot, "README.ko.md"), "utf8");
+  const requiredCommands = [
+    "npm install --global github:hawoond/productloom",
+    "productloom init",
+    "productloom new brief",
+    "productloom new screen",
+    "productloom validate --mode strict",
+    "productloom migrate --from cws",
+    "codex plugin marketplace add hawoond/productloom --ref main",
+    "codex plugin add productloom@productloom"
+  ];
+
+  assert.match(english, /\[한국어\]\(README\.ko\.md\)/);
+  assert.match(korean, /\[English\]\(README\.md\)/);
+
+  for (const command of requiredCommands) {
+    assert.ok(english.includes(command), `README.md is missing ${command}`);
+    assert.ok(korean.includes(command), `README.ko.md is missing ${command}`);
+  }
+
+  const packageMetadata = JSON.parse(
+    fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8")
+  );
+  assert.ok(packageMetadata.files.includes("README.ko.md"));
+});
